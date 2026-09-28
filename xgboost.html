@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>XGBoost Regression | MLForge</title>
+
+<meta name="description" content="Learn XGBoost regression with gradient boosting intuition, decision trees, loss functions, learning rate, regularization, and Python.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://hassanrazzaq9.github.io/xgboost.html">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header class="topbar">
+
+<div class="wrap nav">
+
+<a class="logo" href="index.html">
+ML<span>Forge</span>
+</a>
+
+<nav>
+<a href="index.html#tutorials">Tutorials</a>
+<a href="index.html#categories">Topics</a>
+<a href="index.html#tools">Tools</a>
+<a href="index.html#about">About</a>
+</nav>
+
+</div>
+
+</header>
+
+
+<main class="article">
+
+<div class="wrap article-grid">
+
+<article>
+
+<div class="eyebrow">BOOSTING</div>
+
+<h1>XGBoost Regression</h1>
+
+<p class="lead">
+Learn the fundamentals of XGBoost regression, including gradient
+boosting, sequential trees, loss minimization, learning rate,
+regularization, and Python implementation.
+</p>
+
+
+<h2 id="intuition">1. What Is XGBoost?</h2>
+
+<p>
+XGBoost is a gradient boosting algorithm based on decision trees.
+</p>
+
+<p>
+Instead of building all trees independently, boosting builds trees
+sequentially. Each new tree is trained to improve the existing model.
+</p>
+
+<p>
+The basic idea is:
+</p>
+
+<ul>
+<li>Start with an initial prediction.</li>
+<li>Measure the model's errors.</li>
+<li>Build a new tree that improves those errors.</li>
+<li>Add the new tree to the existing model.</li>
+<li>Repeat the process.</li>
+</ul>
+
+
+<h2 id="math">2. Additive Model</h2>
+
+<p>
+A boosting model can be represented as a sum of tree predictions.
+</p>
+
+<p>
+<strong>
+ŷ(x) = Σ f<sub>k</sub>(x)
+</strong>
+</p>
+
+<p>
+where each <strong>f<sub>k</sub></strong> represents a decision tree.
+</p>
+
+<p>
+The model gradually becomes more accurate as additional trees are
+added.
+</p>
+
+
+<h2>3. Gradient Boosting</h2>
+
+<p>
+Gradient boosting uses information from the loss function to determine
+how the next tree should improve the current model.
+</p>
+
+<p>
+Conceptually, the algorithm repeatedly moves in a direction that
+reduces the model's loss.
+</p>
+
+<p>
+This is related to the same optimization idea behind gradient descent:
+the goal is to minimize a cost or loss function.
+</p>
+
+
+<h2>4. Learning Rate</h2>
+
+<p>
+The learning rate controls how much each new tree contributes to the
+final model.
+</p>
+
+<p>
+A simplified update can be represented as:
+</p>
+
+<p>
+<strong>
+F<sub>new</sub>(x) =
+F<sub>old</sub>(x) + α f(x)
+</strong>
+</p>
+
+<p>
+where <strong>α</strong> is the learning rate.
+</p>
+
+<p>
+A smaller learning rate usually means that more trees may be needed
+to build the model.
+</p>
+
+
+<h2>5. Regularization</h2>
+
+<p>
+XGBoost includes mechanisms that can control model complexity.
+</p>
+
+<p>
+Regularization helps reduce the risk of creating overly complex
+trees and overfitting the training data.
+</p>
+
+<p>
+Important parameters include:
+</p>
+
+<ul>
+<li><strong>max_depth</strong> → controls tree depth.</li>
+<li><strong>min_child_weight</strong> → controls minimum child weight.</li>
+<li><strong>subsample</strong> → controls the fraction of training samples used.</li>
+<li><strong>colsample_bytree</strong> → controls feature sampling.</li>
+<li><strong>reg_alpha</strong> → L1 regularization.</li>
+<li><strong>reg_lambda</strong> → L2 regularization.</li>
+</ul>
+
+
+<h2>6. Important Hyperparameters</h2>
+
+<ul>
+<li><strong>n_estimators</strong> → number of boosting rounds.</li>
+<li><strong>learning_rate</strong> → contribution of each tree.</li>
+<li><strong>max_depth</strong> → maximum tree depth.</li>
+<li><strong>subsample</strong> → fraction of samples used.</li>
+<li><strong>colsample_bytree</strong> → fraction of features used.</li>
+</ul>
+
+
+<h2 id="code">7. Python Implementation</h2>
+
+<pre><code>from xgboost import XGBRegressor
+
+model = XGBRegressor(
+    n_estimators=100,
+    learning_rate=0.05,
+    max_depth=3,
+    random_state=42
+)
+
+model.fit(X_train, y_train)
+
+predictions = model.predict(X_test)
+</code></pre>
+
+
+<h2>8. Evaluating the Model</h2>
+
+<pre><code>from sklearn.metrics import mean_absolute_error
+from sklearn.metrics import mean_squared_error
+import numpy as np
+
+mae = mean_absolute_error(y_test, predictions)
+
+rmse = np.sqrt(
+    mean_squared_error(y_test, predictions)
+)
+
+print("MAE:", mae)
+print("RMSE:", rmse)
+</code></pre>
+
+
+<h2>9. XGBoost Workflow</h2>
+
+<ol>
+<li>Load the dataset.</li>
+<li>Prepare the features and target.</li>
+<li>Split the dataset into training and testing data.</li>
+<li>Create the XGBoost model.</li>
+<li>Train the model.</li>
+<li>Build trees sequentially.</li>
+<li>Generate predictions.</li>
+<li>Evaluate the predictions.</li>
+<li>Tune hyperparameters when necessary.</li>
+</ol>
+
+
+<h2 id="next">10. Next Steps</h2>
+
+<p>
+After learning XGBoost, an important next topic is regularization.
+Regularization is used to control model complexity and reduce
+overfitting.
+</p>
+
+<p>
+<a href="index.html#tutorials">
+← Back to MLForge tutorials
+</a>
+</p>
+
+</article>
+
+
+<aside>
+
+<div class="side">
+
+<b>On this page</b>
+
+<a href="#intuition">Intuition</a>
+
+<a href="#math">Mathematics</a>
+
+<a href="#code">Python</a>
+
+<a href="#next">Next steps</a>
+
+</div>
+
+</aside>
+
+</div>
+
+</main>
+
+
+<footer>
+
+<div class="wrap footer">
+
+<div>
+<b>MLForge</b>
+<p>Machine learning explained clearly.</p>
+</div>
+
+<a href="index.html">
+← Back home
+</a>
+
+</div>
+
+</footer>
+
+</body>
+
+</html>
