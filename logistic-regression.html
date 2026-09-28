@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Logistic Regression With Python | MLForge</title>
+
+<meta name="description" content="Learn logistic regression from scratch with sigmoid function, decision boundary, log loss, gradient descent, regularization, and Python.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://hassanrazzaq9.github.io/logistic-regression.html">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header class="topbar">
+
+  <div class="wrap nav">
+
+    <a class="logo" href="index.html">
+      ML<span>Forge</span>
+    </a>
+
+    <nav>
+      <a href="index.html#tutorials">Tutorials</a>
+      <a href="index.html#categories">Topics</a>
+      <a href="index.html#tools">Tools</a>
+      <a href="index.html#about">About</a>
+    </nav>
+
+  </div>
+
+</header>
+
+
+<main class="article">
+
+<div class="wrap article-grid">
+
+<article>
+
+<div class="eyebrow">CLASSIFICATION</div>
+
+<h1>Logistic Regression With Python</h1>
+
+<p class="lead">
+Learn logistic regression from mathematical intuition to Python,
+including the sigmoid function, decision boundary, log loss, and
+gradient descent.
+</p>
+
+
+<h2 id="intuition">1. What Is Logistic Regression?</h2>
+
+<p>
+Logistic regression is a supervised machine learning algorithm used
+mainly for binary classification.
+</p>
+
+<p>
+Instead of predicting a continuous numerical value, the model
+predicts the probability that an example belongs to a particular
+class.
+</p>
+
+<p>
+For example, we could predict whether a student will pass or fail
+based on study hours.
+</p>
+
+<ul>
+<li>0 → Fail</li>
+<li>1 → Pass</li>
+</ul>
+
+
+<h2 id="math">2. Linear Model</h2>
+
+<p>
+Logistic regression first calculates a linear combination of the
+input features:
+</p>
+
+<p>
+<strong>z = w₁x₁ + w₂x₂ + ... + wₙxₙ + b</strong>
+</p>
+
+<p>
+Or using vectors:
+</p>
+
+<p>
+<strong>z = Xw + b</strong>
+</p>
+
+<p>
+The value of z can be any real number.
+</p>
+
+
+<h2>3. Sigmoid Function</h2>
+
+<p>
+The linear model output is passed through the sigmoid function.
+</p>
+
+<p>
+<strong>f(z) = 1 / (1 + e⁻ᶻ)</strong>
+</p>
+
+<p>
+The sigmoid function converts any value into a number between 0 and 1.
+</p>
+
+<ul>
+<li>z → large positive value → probability approaches 1</li>
+<li>z = 0 → probability = 0.5</li>
+<li>z → large negative value → probability approaches 0</li>
+</ul>
+
+<p>
+Therefore, the model's prediction can be interpreted as a probability.
+</p>
+
+
+<h2>4. Classification Threshold</h2>
+
+<p>
+A common threshold is 0.5.
+</p>
+
+<p>
+If:
+</p>
+
+<p>
+<strong>f(z) ≥ 0.5 → class 1</strong>
+</p>
+
+<p>
+and:
+</p>
+
+<p>
+<strong>f(z) &lt; 0.5 → class 0</strong>
+</p>
+
+<p>
+For example, if the model predicts 0.82, the predicted class would
+normally be 1 when using a 0.5 threshold.
+</p>
+
+
+<h2>5. Decision Boundary</h2>
+
+<p>
+The decision boundary separates the two predicted classes.
+</p>
+
+<p>
+With a threshold of 0.5:
+</p>
+
+<p>
+<strong>f(z) = 0.5</strong>
+</p>
+
+<p>
+The sigmoid function equals 0.5 when:
+</p>
+
+<p>
+<strong>z = 0</strong>
+</p>
+
+<p>
+Therefore, the decision boundary is:
+</p>
+
+<p>
+<strong>w₁x₁ + w₂x₂ + ... + wₙxₙ + b = 0</strong>
+</p>
+
+
+<h2>6. Logistic Regression Cost Function</h2>
+
+<p>
+Mean squared error is generally not used as the standard cost
+function for logistic regression.
+</p>
+
+<p>
+Instead, logistic regression uses log loss, also called binary
+cross-entropy loss.
+</p>
+
+<p>
+For one training example:
+</p>
+
+<p>
+<strong>
+L(f(x), y) =
+−y log(f(x)) − (1 − y) log(1 − f(x))
+</strong>
+</p>
+
+<p>
+For the complete training set:
+</p>
+
+<p>
+<strong>
+J(w,b) =
+−(1/m) Σ[
+y log(f(x)) +
+(1−y) log(1−f(x))
+]
+</strong>
+</p>
+
+
+<h2>7. Why Log Loss?</h2>
+
+<p>
+Log loss strongly penalizes confident incorrect predictions.
+</p>
+
+<p>
+For example, predicting a probability close to 1 for the wrong class
+produces a large loss.
+</p>
+
+<p>
+This encourages the model to produce probabilities that better match
+the actual labels.
+</p>
+
+
+<h2>8. Gradient Descent</h2>
+
+<p>
+The parameters are learned by minimizing the cost function.
+</p>
+
+<p>
+The update for a parameter is:
+</p>
+
+<p>
+<strong>w := w − α ∂J/∂w</strong>
+</p>
+
+<p>
+The bias is updated using:
+</p>
+
+<p>
+<strong>b := b − α ∂J/∂b</strong>
+</p>
+
+<p>
+For logistic regression, the gradient can be written as:
+</p>
+
+<p>
+<strong>
+∂J/∂w = (1/m) Xᵀ(f(X) − y)
+</strong>
+</p>
+
+<p>
+and:
+</p>
+
+<p>
+<strong>
+∂J/∂b = (1/m) Σ(f(x) − y)
+</strong>
+</p>
+
+
+<h2 id="code">9. Python Implementation</h2>
+
+<pre><code>import numpy as np
+
+
+def sigmoid(z):
+
+    return 1 / (1 + np.exp(-z))
+
+
+def predict_probability(X, w, b):
+
+    z = np.dot(X, w) + b
+
+    return sigmoid(z)
+</code></pre>
+
+
+<h2>10. Compute the Cost</h2>
+
+<pre><code>def compute_cost(X, y, w, b):
+
+    m = len(y)
+
+    probabilities = predict_probability(X, w, b)
+
+    cost = -(1 / m) * np.sum(
+        y * np.log(probabilities) +
+        (1 - y) * np.log(1 - probabilities)
+    )
+
+    return cost
+</code></pre>
+
+
+<h2>11. Gradient Descent</h2>
+
+<pre><code>def gradient_descent(X, y, w, b, learning_rate, iterations):
+
+    m = len(y)
+
+    for _ in range(iterations):
+
+        probabilities = predict_probability(X, w, b)
+
+        error = probabilities - y
+
+        dw = (1 / m) * np.dot(X.T, error)
+
+        db = (1 / m) * np.sum(error)
+
+        w = w - learning_rate * dw
+
+        b = b - learning_rate * db
+
+    return w, b
+</code></pre>
+
+
+<h2>12. Making Predictions</h2>
+
+<pre><code>def predict(X, w, b):
+
+    probabilities = predict_probability(X, w, b)
+
+    predictions = (probabilities >= 0.5).astype(int)
+
+    return predictions
+</code></pre>
+
+
+<h2>13. Complete Workflow</h2>
+
+<ol>
+
+<li>Load the dataset.</li>
+
+<li>Separate features X and target y.</li>
+
+<li>Initialize weights and bias.</li>
+
+<li>Calculate z.</li>
+
+<li>Apply the sigmoid function.</li>
+
+<li>Calculate log loss.</li>
+
+<li>Calculate gradients.</li>
+
+<li>Update weights and bias using gradient descent.</li>
+
+<li>Repeat the process.</li>
+
+<li>Use the trained model to make predictions.</li>
+
+</ol>
+
+
+<h2 id="next">14. Next Steps</h2>
+
+<p>
+After understanding logistic regression, learn train/test splitting,
+feature scaling, model evaluation, and regularization.
+</p>
+
+<p>
+<a href="index.html#tutorials">
+← Back to MLForge tutorials
+</a>
+</p>
+
+</article>
+
+
+<aside>
+
+<div class="side">
+
+<b>On this page</b>
+
+<a href="#intuition">Intuition</a>
+
+<a href="#math">Mathematics</a>
+
+<a href="#code">Python</a>
+
+<a href="#next">Next steps</a>
+
+</div>
+
+</aside>
+
+</div>
+
+</main>
+
+
+<footer>
+
+<div class="wrap footer">
+
+<div>
+
+<b>MLForge</b>
+
+<p>
+Machine learning explained clearly.
+</p>
+
+</div>
+
+<a href="index.html">
+← Back home
+</a>
+
+</div>
+
+</footer>
+
+</body>
+
+</html>
