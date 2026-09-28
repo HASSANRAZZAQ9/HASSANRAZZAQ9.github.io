@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Learn machine learning with practical Python tutorials, mathematical intuition, algorithms, and projects.">
+<title>MLForge — Machine Learning Tutorials</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap nav">
+    <a class="logo" href="index.html">ML<span>Forge</span></a>
+    <nav>
+      <a href="#tutorials">Tutorials</a>
+      <a href="#categories">Topics</a>
+      <a href="#tools">Tools</a>
+      <a href="#about">About</a>
+    </nav>
+    <a class="btn small" href="#tutorials">Start Learning</a>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">MACHINE LEARNING • PYTHON • MATH</div>
+      <h1>Machine learning, explained from <span>math to code.</span></h1>
+      <p class="lead">Practical tutorials that connect intuition, equations, NumPy implementations, real datasets, and scikit-learn.</p>
+      <div class="actions">
+        <a class="btn" href="#tutorials">Explore tutorials</a>
+        <a class="btn ghost" href="#tools">Try free tools</a>
+      </div>
+      <div class="stats">
+        <div><strong>30+</strong><span>Planned tutorials</span></div>
+        <div><strong>100%</strong><span>Free to read</span></div>
+        <div><strong>Python</strong><span>Hands-on examples</span></div>
+      </div>
+    </div>
+    <div class="code-card">
+      <div class="dots"><i></i><i></i><i></i></div>
+<pre><code><span class="kw">def</span> <span class="fn">gradient_descent</span>(X, y, lr=0.01):
+    b = np.zeros(X.shape[1])
+
+    <span class="kw">for</span> _ <span class="kw">in</span> range(1000):
+        pred = X @ b
+        error = pred - y
+        gradient = (X.T @ error) / len(y)
+        b -= lr * gradient
+
+    <span class="kw">return</span> b</code></pre>
+      <p>Understand what every line actually does.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="tutorials">
+<div class="wrap">
+  <div class="section-head">
+    <div><div class="eyebrow">LEARN</div><h2>Popular tutorials</h2></div>
+    <input id="search" class="search" placeholder="Search tutorials..." aria-label="Search tutorials">
+  </div>
+  <div class="cards" id="cards">
+    <article class="card" data-title="Multiple Linear Regression From Scratch">
+      <div class="tag">Regression</div><h3>Multiple Linear Regression From Scratch</h3>
+      <p>Learn b₀ + b₁x₁ + … + bₙxₙ, cost function, gradients, and NumPy training.</p>
+      <a href="tutorial.html?topic=multiple-linear-regression">Read tutorial →</a>
+    </article>
+    <article class="card" data-title="Gradient Descent Explained">
+      <div class="tag">Math</div><h3>Gradient Descent Explained</h3>
+      <p>Build intuition for gradients, learning rate, cost minimization, and parameter updates.</p>
+      <a href="tutorial.html?topic=gradient-descent">Read tutorial →</a>
+    </article>
+    <article class="card" data-title="Logistic Regression With Python">
+      <div class="tag">Classification</div><h3>Logistic Regression With Python</h3>
+      <p>Understand sigmoid, binary classification, log loss, and model evaluation.</p>
+      <a href="tutorial.html?topic=logistic-regression">Read tutorial →</a>
+    </article>
+    <article class="card" data-title="Train Test Split and Scaling">
+      <div class="tag">Preprocessing</div><h3>Train/Test Split & Feature Scaling</h3>
+      <p>Prepare datasets correctly and understand why scaling changes optimization.</p>
+      <a href="tutorial.html?topic=preprocessing">Read tutorial →</a>
+    </article>
+    <article class="card" data-title="Random Forest Explained">
+      <div class="tag">Trees</div><h3>Random Forest Explained</h3>
+      <p>Learn how many decision trees work together and why ensembles can generalize well.</p>
+      <a href="tutorial.html?topic=random-forest">Read tutorial →</a>
+    </article>
+    <article class="card" data-title="XGBoost Regression">
+      <div class="tag">Boosting</div><h3>XGBoost Regression</h3>
+      <p>A practical introduction to gradient boosting with a real regression workflow.</p>
+      <a href="tutorial.html?topic=xgboost">Read tutorial →</a>
+    </article>
+  </div>
+</div>
+</section>
+
+<section class="section alt" id="categories">
+<div class="wrap">
+  <div class="eyebrow">TOPICS</div><h2>Build your ML foundation</h2>
+  <div class="topic-grid">
+    <div><b>Python for ML</b><span>NumPy · Pandas · Matplotlib</span></div>
+    <div><b>Supervised Learning</b><span>Regression · Classification</span></div>
+    <div><b>Unsupervised Learning</b><span>K-Means · PCA · Clustering</span></div>
+    <div><b>ML Mathematics</b><span>Vectors · derivatives · probability</span></div>
+    <div><b>Model Evaluation</b><span>MAE · RMSE · R² · F1</span></div>
+    <div><b>Real Projects</b><span>Datasets · pipelines · deployment</span></div>
+  </div>
+</div>
+</section>
+
+<section class="section" id="tools">
+<div class="wrap">
+  <div class="eyebrow">FREE TOOLS</div><h2>Practice with calculators</h2>
+  <div class="tool-grid">
+    <div class="tool"><h3>Regression Metrics</h3><p>Enter actual and predicted values to calculate MAE, RMSE and R².</p>
+      <textarea id="actual" placeholder="Actual: 3, 5, 7, 9"></textarea>
+      <textarea id="pred" placeholder="Predicted: 2.5, 5.2, 6.8, 9.4"></textarea>
+      <button class="btn" onclick="metrics()">Calculate</button><div id="metricResult" class="result"></div>
+    </div>
+    <div class="tool"><h3>Confusion Matrix</h3><p>Calculate common classification metrics from TP, TN, FP and FN.</p>
+      <div class="four"><input id="tp" placeholder="TP"><input id="tn" placeholder="TN"><input id="fp" placeholder="FP"><input id="fn" placeholder="FN"></div>
+      <button class="btn" onclick="confusion()">Calculate</button><div id="confResult" class="result"></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="section about" id="about">
+<div class="wrap narrow"><div class="eyebrow">ABOUT</div><h2>Learn by understanding, not memorizing.</h2>
+<p>MLForge is a simple educational site concept focused on explaining machine learning algorithms with intuition, mathematics, and Python. Replace this text with your own author bio and original content before publishing.</p>
+</div>
+</section>
+</main>
+
+<footer><div class="wrap footer"><div><b>MLForge</b><p>Machine learning explained clearly.</p></div><div><a href="#">Privacy</a><a href="#">Contact</a><a href="#">Terms</a></div></div></footer>
+<script src="script.js"></script>
+</body>
+</html>
