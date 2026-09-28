@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Random Forest Explained | MLForge</title>
+
+<meta name="description" content="Learn how Random Forest works with decision trees, bootstrap sampling, feature randomness, voting, regression, classification, and Python.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://hassanrazzaq9.github.io/random-forest.html">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header class="topbar">
+
+<div class="wrap nav">
+
+<a class="logo" href="index.html">
+ML<span>Forge</span>
+</a>
+
+<nav>
+<a href="index.html#tutorials">Tutorials</a>
+<a href="index.html#categories">Topics</a>
+<a href="index.html#tools">Tools</a>
+<a href="index.html#about">About</a>
+</nav>
+
+</div>
+
+</header>
+
+
+<main class="article">
+
+<div class="wrap article-grid">
+
+<article>
+
+<div class="eyebrow">TREES & ENSEMBLES</div>
+
+<h1>Random Forest Explained</h1>
+
+<p class="lead">
+Understand how Random Forest combines many decision trees to make
+more robust predictions for classification and regression.
+</p>
+
+
+<h2 id="intuition">1. What Is Random Forest?</h2>
+
+<p>
+Random Forest is an ensemble machine learning algorithm based on
+multiple decision trees.
+</p>
+
+<p>
+Instead of relying on one decision tree, Random Forest creates many
+trees and combines their predictions.
+</p>
+
+<p>
+The main idea is:
+</p>
+
+<ul>
+<li>Create many different training samples.</li>
+<li>Train a decision tree on each sample.</li>
+<li>Use randomness when selecting features.</li>
+<li>Combine the predictions of all trees.</li>
+</ul>
+
+
+<h2 id="math">2. Why Use Multiple Trees?</h2>
+
+<p>
+A single decision tree can sometimes become highly specialized to its
+training data.
+</p>
+
+<p>
+Combining many trees can reduce the effect of an individual tree's
+errors.
+</p>
+
+<p>
+This is called an <strong>ensemble method</strong>.
+</p>
+
+
+<h2>3. Bootstrap Sampling</h2>
+
+<p>
+Random Forest commonly uses bootstrap samples to train individual
+trees.
+</p>
+
+<p>
+Suppose the original training dataset contains <strong>m</strong>
+examples.
+</p>
+
+<p>
+A bootstrap sample is created by repeatedly selecting examples from
+the training dataset with replacement.
+</p>
+
+<p>
+Different trees therefore receive different training samples.
+</p>
+
+
+<h2>4. Random Feature Selection</h2>
+
+<p>
+Random Forest also introduces randomness when choosing features for
+tree splits.
+</p>
+
+<p>
+Instead of considering every feature at every split, the algorithm
+considers a randomly selected subset of features.
+</p>
+
+<p>
+This makes the trees less dependent on the same features and helps
+create diversity among the trees.
+</p>
+
+
+<h2>5. Random Forest Classification</h2>
+
+<p>
+For classification, each tree produces a class prediction.
+</p>
+
+<p>
+The final prediction is commonly determined by majority voting.
+</p>
+
+<p>
+For example, suppose five trees predict:
+</p>
+
+<ul>
+<li>Tree 1 → Class 1</li>
+<li>Tree 2 → Class 1</li>
+<li>Tree 3 → Class 0</li>
+<li>Tree 4 → Class 1</li>
+<li>Tree 5 → Class 0</li>
+</ul>
+
+<p>
+Class 1 receives three votes, while Class 0 receives two votes.
+The ensemble therefore predicts Class 1.
+</p>
+
+
+<h2>6. Random Forest Regression</h2>
+
+<p>
+For regression, the predictions from the individual trees can be
+combined using their average.
+</p>
+
+<p>
+For <strong>T</strong> trees:
+</p>
+
+<p>
+<strong>
+ŷ = (1/T) Σ ŷ<sub>t</sub>
+</strong>
+</p>
+
+<p>
+where each ŷ<sub>t</sub> is the prediction from one tree.
+</p>
+
+
+<h2>7. Important Hyperparameters</h2>
+
+<ul>
+<li><strong>n_estimators</strong> → number of trees.</li>
+<li><strong>max_depth</strong> → maximum depth of each tree.</li>
+<li><strong>min_samples_split</strong> → minimum samples required to split.</li>
+<li><strong>min_samples_leaf</strong> → minimum samples in a leaf.</li>
+<li><strong>max_features</strong> → number of features considered for splits.</li>
+</ul>
+
+
+<h2 id="code">8. Python Classification</h2>
+
+<pre><code>from sklearn.ensemble import RandomForestClassifier
+
+model = RandomForestClassifier(
+    n_estimators=100,
+    random_state=42
+)
+
+model.fit(X_train, y_train)
+
+predictions = model.predict(X_test)
+</code></pre>
+
+
+<h2>9. Python Regression</h2>
+
+<pre><code>from sklearn.ensemble import RandomForestRegressor
+
+model = RandomForestRegressor(
+    n_estimators=100,
+    random_state=42
+)
+
+model.fit(X_train, y_train)
+
+predictions = model.predict(X_test)
+</code></pre>
+
+
+<h2>10. Random Forest Workflow</h2>
+
+<ol>
+<li>Prepare the dataset.</li>
+<li>Split the data into training and testing sets.</li>
+<li>Create bootstrap samples.</li>
+<li>Train multiple decision trees.</li>
+<li>Use random feature subsets during tree construction.</li>
+<li>Collect predictions from all trees.</li>
+<li>Combine the predictions.</li>
+<li>Evaluate the final model.</li>
+</ol>
+
+
+<h2 id="next">11. Next Steps</h2>
+
+<p>
+After Random Forest, learn boosting algorithms such as XGBoost.
+Boosting takes a different approach by building models sequentially
+to improve previous predictions.
+</p>
+
+<p>
+<a href="index.html#tutorials">
+← Back to MLForge tutorials
+</a>
+</p>
+
+</article>
+
+
+<aside>
+
+<div class="side">
+
+<b>On this page</b>
+
+<a href="#intuition">Intuition</a>
+<a href="#math">Mathematics</a>
+<a href="#code">Python</a>
+<a href="#next">Next steps</a>
+
+</div>
+
+</aside>
+
+</div>
+
+</main>
+
+
+<footer>
+
+<div class="wrap footer">
+
+<div>
+<b>MLForge</b>
+<p>Machine learning explained clearly.</p>
+</div>
+
+<a href="index.html">
+← Back home
+</a>
+
+</div>
+
+</footer>
+
+</body>
+
+</html>
