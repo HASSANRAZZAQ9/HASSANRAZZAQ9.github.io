@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Gradient Descent Explained | MLForge</title>
+
+<meta name="description" content="Learn gradient descent from scratch with mathematical intuition, learning rate, cost function, parameter updates, and Python examples.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://hassanrazzaq9.github.io/gradient-descent.html">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header class="topbar">
+
+  <div class="wrap nav">
+
+    <a class="logo" href="index.html">
+      ML<span>Forge</span>
+    </a>
+
+    <nav>
+      <a href="index.html#tutorials">Tutorials</a>
+      <a href="index.html#categories">Topics</a>
+      <a href="index.html#tools">Tools</a>
+      <a href="index.html#about">About</a>
+    </nav>
+
+  </div>
+
+</header>
+
+
+<main class="article">
+
+<div class="wrap article-grid">
+
+<article>
+
+<div class="eyebrow">MACHINE LEARNING MATH</div>
+
+<h1>Gradient Descent Explained</h1>
+
+<p class="lead">
+Understand gradient descent from mathematical intuition to Python
+implementation, including gradients, learning rate, cost function,
+and parameter updates.
+</p>
+
+
+<h2 id="intuition">1. What Is Gradient Descent?</h2>
+
+<p>
+Gradient descent is an optimization algorithm used to find parameter
+values that minimize a cost function.
+</p>
+
+<p>
+In machine learning, we first make predictions, calculate how wrong
+those predictions are, and then use the gradient to decide how the
+model parameters should change.
+</p>
+
+<p>
+The basic idea is:
+</p>
+
+<ul>
+<li>Calculate the cost.</li>
+<li>Calculate the gradient.</li>
+<li>Move the parameters in the opposite direction of the gradient.</li>
+<li>Repeat the process.</li>
+</ul>
+
+
+<h2 id="math">2. Gradient Descent Formula</h2>
+
+<p>
+For a parameter <strong>w</strong>, the update rule is:
+</p>
+
+<p>
+<strong>w := w − α ∂J/∂w</strong>
+</p>
+
+<p>
+For the bias:
+</p>
+
+<p>
+<strong>b := b − α ∂J/∂b</strong>
+</p>
+
+<p>
+Here:
+</p>
+
+<ul>
+<li><strong>w</strong> = model parameter</li>
+<li><strong>b</strong> = bias</li>
+<li><strong>α</strong> = learning rate</li>
+<li><strong>J</strong> = cost function</li>
+<li><strong>∂J/∂w</strong> = gradient with respect to w</li>
+</ul>
+
+
+<h2>3. Why Do We Subtract the Gradient?</h2>
+
+<p>
+The gradient tells us the direction in which the cost increases.
+Therefore, moving in the opposite direction helps reduce the cost.
+</p>
+
+<p>
+That is why the update contains:
+</p>
+
+<p>
+<strong>− α × gradient</strong>
+</p>
+
+<p>
+A large gradient produces a larger parameter update, while a small
+gradient produces a smaller update.
+</p>
+
+
+<h2>4. Learning Rate</h2>
+
+<p>
+The learning rate controls how large each parameter update is.
+</p>
+
+<p>
+For example:
+</p>
+
+<ul>
+<li>Very small learning rate → learning can be slow.</li>
+<li>Very large learning rate → the algorithm may overshoot the minimum.</li>
+<li>Suitable learning rate → the cost can gradually decrease.</li>
+</ul>
+
+<p>
+A common symbol for the learning rate is:
+</p>
+
+<p>
+<strong>α</strong>
+</p>
+
+
+<h2>5. Gradient Descent for Linear Regression</h2>
+
+<p>
+For multiple linear regression, the prediction is:
+</p>
+
+<p>
+<strong>ŷ = Xw + b</strong>
+</p>
+
+<p>
+The mean squared error cost function can be written as:
+</p>
+
+<p>
+<strong>J(w,b) = (1 / 2m) Σ(ŷ − y)²</strong>
+</p>
+
+<p>
+The gradients are:
+</p>
+
+<p>
+<strong>∂J/∂w = (1/m) Xᵀ(ŷ − y)</strong>
+</p>
+
+<p>
+<strong>∂J/∂b = (1/m) Σ(ŷ − y)</strong>
+</p>
+
+
+<h2 id="code">6. Python Implementation</h2>
+
+<pre><code>import numpy as np
+
+def predict(X, w, b):
+
+    return np.dot(X, w) + b
+
+
+def compute_cost(X, y, w, b):
+
+    m = len(y)
+
+    predictions = predict(X, w, b)
+
+    error = predictions - y
+
+    cost = (1 / (2 * m)) * np.sum(error ** 2)
+
+    return cost
+</code></pre>
+
+
+<h2>7. Gradient Descent Code</h2>
+
+<pre><code>def gradient_descent(X, y, w, b, learning_rate, iterations):
+
+    m = len(y)
+
+    for _ in range(iterations):
+
+        predictions = predict(X, w, b)
+
+        error = predictions - y
+
+        dw = (1 / m) * np.dot(X.T, error)
+
+        db = (1 / m) * np.sum(error)
+
+        w = w - learning_rate * dw
+
+        b = b - learning_rate * db
+
+    return w, b
+</code></pre>
+
+
+<h2>8. The Complete Process</h2>
+
+<p>
+Gradient descent repeatedly performs the following process:
+</p>
+
+<ol>
+<li>Initialize weights and bias.</li>
+<li>Calculate predictions.</li>
+<li>Calculate the error.</li>
+<li>Calculate the gradients.</li>
+<li>Update weights and bias.</li>
+<li>Repeat for a number of iterations.</li>
+</ol>
+
+<p>
+The objective is to find parameters that produce a lower cost and
+better predictions.
+</p>
+
+
+<h2 id="next">9. Next Steps</h2>
+
+<p>
+After learning gradient descent, the next important topic is logistic
+regression. Logistic regression uses optimization techniques such as
+gradient descent to learn parameters for classification problems.
+</p>
+
+<p>
+<a href="index.html#tutorials">← Back to MLForge tutorials</a>
+</p>
+
+</article>
+
+
+<aside>
+
+<div class="side">
+
+<b>On this page</b>
+
+<a href="#intuition">Intuition</a>
+<a href="#math">Math</a>
+<a href="#code">Python</a>
+<a href="#next">Next steps</a>
+
+</div>
+
+</aside>
+
+</div>
+
+</main>
+
+
+<footer>
+
+<div class="wrap footer">
+
+<div>
+<b>MLForge</b>
+
+<p>
+Machine learning explained clearly.
+</p>
+
+</div>
+
+<a href="index.html">
+← Back home
+</a>
+
+</div>
+
+</footer>
+
+</body>
+
+</html>
